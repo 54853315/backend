@@ -34,7 +34,7 @@ class ExportController extends Controller
     public function downLoadFile()
     {
         Storage::makeDirectory('public/exports');
-        $type = request('type');
+        $type = request('type'');
         $cache = request('cache');
         $title = explode(',', request('title'));
         $prefix = request('prefix');
@@ -77,12 +77,12 @@ class ExportController extends Controller
 //                        'O' => 100
 //                    ));
             });
-        })->store('xls', storage_path('exports'), false);
+        })->store('xlsx', storage_path('exports'), false);
 
-        $result = \File::move(storage_path('exports').'/'.$fileName.'.xls', storage_path('app/public/exports/').$fileName.'.xls');
+        $result = \File::move(storage_path('exports').'/'.$fileName.'.xlsx', storage_path('app/public/exports/').$fileName.'.xlsx');
 
         if ($result) {
-            return $this->ajaxJson(true, ['url' => '/storage/exports/'.$fileName.'.xls']);
+            return $this->ajaxJson(true, ['url' => '/storage/exports/'.$fileName.'.xlsx']);
         }
 
         return $this->ajaxJson(false);
